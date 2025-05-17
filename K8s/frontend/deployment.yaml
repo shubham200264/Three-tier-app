@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: three-tier
+  labels:
+    app: frontend
+spec: 
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels: 
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec: 
+      imagePullSecrets:
+      - name: ecr-registry-secret
+      containers:
+      - name: frontend
+        image: 891376949252.dkr.ecr.us-east-1.amazonaws.com/threetier-frontend:latest
+        imagePullPolicy: Always
+        env:
+          - name: REACT_APP_BACKEND_URL
+            value: "http://k8s-threetie-mainlb-73c240e86c-1513710042.us-west-2.elb.amazonaws.com/api/tasks"
+        ports:
+        - containerPort: 3000
