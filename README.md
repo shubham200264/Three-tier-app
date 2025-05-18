@@ -51,8 +51,8 @@ User ↔ ALB (Ingress Controller)
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/three-tier-k8s-eks.git
-   cd three-tier-k8s-eks
+   git clone https://github.com/shubham200264/Three-tier-app.git
+   cd Three-tier-app
    ```
 
 2. **Create Kubernetes Namespace**
